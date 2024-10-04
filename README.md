@@ -30,7 +30,7 @@ This algorithm generates a random offset for encryption. It offers more security
 
 ## How to Use
 
-1. Go to https://parsa13ah.github.io/Professional-Html-Encryption-Decryption/ or run html file in your computer
+1. Go to [Here](https://parsa13ah.github.io/Professional-Html-Encryption-Decryption/) or run html file in your computer
 2. Enter your text in the input box.
 3. Select one of the available algorithms from the dropdown menu.
 4. Click the "Encrypt" button for encryption or the "Decrypt" button for decryption.
