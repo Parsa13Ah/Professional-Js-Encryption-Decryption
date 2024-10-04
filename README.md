@@ -1,4 +1,4 @@
-# Encryption and Decryption Tool
+# Encryption and Decryption Tool V2
 
 This tool is designed for encrypting and decrypting text using various algorithms. Users can enter their text and select one of the available algorithms for encryption or decryption.
 
@@ -30,10 +30,11 @@ This algorithm generates a random offset for encryption. It offers more security
 
 ## How to Use
 
-1. Enter your text in the input box.
-2. Select one of the available algorithms from the dropdown menu.
-3. Click the "Encrypt" button for encryption or the "Decrypt" button for decryption.
-4. The result will be displayed below the input box.
+1. Go to https://parsa13ah.github.io/Professional-Html-Encryption-Decryption/ or run html file in your computer
+2. Enter your text in the input box.
+3. Select one of the available algorithms from the dropdown menu.
+4. Click the "Encrypt" button for encryption or the "Decrypt" button for decryption.
+5. The result will be displayed below the input box.
 
 ## Requirements
 
