@@ -24,26 +24,6 @@ h1 {
     text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700;
 }
 
-#author {
-    margin-bottom: 20px;
-    color: #FFD700;
-    font-size: 18px;
-    text-shadow: 0 0 10px #FFD700;
-}
-
-#authorText {
-    animation: neonRGB 3s infinite;
-}
-
-@keyframes neonRGB {
-    0% { color: red; }
-    20% { color: orange; }
-    40% { color: yellow; }
-    60% { color: green; }
-    80% { color: blue; }
-    100% { color: violet; }
-}
-
 select, textarea, button {
     width: 100%;
     margin-bottom: 10px;
@@ -100,9 +80,35 @@ button:hover {
     max-height: 150px; /* حداکثر ارتفاع */
 }
 
+.hidden {
+    display: none;
+}
+
 #copyButton {
     margin-top: 10px;
     background-color: #333;
     color: #FFD700;
     border: 2px solid #FFD700;
+}
+
+#authorText {
+    font-size: 18px;
+    color: #FFD700; /* زرد */
+    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700; /* افکت نئون */
+    animation: neonRGB 3s infinite alternate;
+    margin-top: 20px; /* فاصله از بالای متن */
+    margin-bottom: 0; /* عدم وجود فاصله پایین */
+    position: relative; /* موقعیت دهی */
+    bottom: -10px; /* تنظیم موقعیت عمودی */
+    text-align: center; /* وسط چیدن متن */
+}
+
+
+@keyframes neonRGB {
+    0% { color: red; }
+    20% { color: orange; }
+    40% { color: yellow; }
+    60% { color: green; }
+    80% { color: blue; }
+    100% { color: violet; }
 }
