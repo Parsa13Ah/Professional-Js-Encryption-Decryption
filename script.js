@@ -1,61 +1,118 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const actionSelect = document.getElementById('action');
-    const inputTextArea = document.getElementById('inputText');
-    const resultTitle = document.getElementById('resultTitle');
-    const resultText = document.getElementById('result');
-    const copyButton = document.getElementById('copyButton');
-
-    actionSelect.addEventListener('change', () => {
-        inputTextArea.value = ''; // Clear input text when changing option
-        resultText.textContent = ''; // Clear result
-    });
-
-    copyButton.addEventListener('click', () => {
-        navigator.clipboard.writeText(resultText.textContent)
-            .then(() => {
-                alert('Text copied!');
-            })
-            .catch(err => {
-                console.error('Copy error:', err);
-            });
-    });
-
-    document.querySelector('button[type="button"]').addEventListener('click', () => {
-        const action = actionSelect.value;
-        const inputText = inputTextArea.value;
-
-        if (action === 'encrypt') {
-            resultText.textContent = encryptText(inputText);
-            resultTitle.textContent = 'Encryption Result:';
-        } else if (action === 'decrypt') {
-            resultText.textContent = decryptText(inputText);
-            resultTitle.textContent = 'Decryption Result:';
-        } else {
-            alert('Please select an option!');
+function encryptCaesar(text, shift) {
+    return text.split('').map(char => {
+        if (/[a-zA-Z]/.test(char)) {
+            const base = char.charCodeAt(0) >= 97 ? 97 : 65; // Lowercase or uppercase
+            return String.fromCharCode(((char.charCodeAt(0) - base + shift) % 26) + base);
         }
-    });
+        return char;
+    }).join('');
+}
 
-    function encryptText(text) {
-        let result = '';
-        for (let i = 0; i < text.length; i++) {
-            const charCode = text.charCodeAt(i);
-            const randomOffset = Math.floor(Math.random() * 256); // Offset between 0 and 255
-            const encryptedChar = String.fromCharCode(charCode + randomOffset);
-            result += `${randomOffset},${encryptedChar};`; // Store offset and character
+function decryptCaesar(text, shift) {
+    return encryptCaesar(text, 26 - (shift % 26)); // Inverse shift
+}
+
+function encryptVigenere(text, key) {
+    let keyIndex = 0;
+    return text.split('').map(char => {
+        if (/[a-zA-Z]/.test(char)) {
+            const base = char.charCodeAt(0) >= 97 ? 97 : 65; // Lowercase or uppercase
+            const shift = key[keyIndex % key.length].toLowerCase().charCodeAt(0) - 97;
+            keyIndex++;
+            return String.fromCharCode(((char.charCodeAt(0) - base + shift) % 26) + base);
         }
-        return result;
+        return char;
+    }).join('');
+}
+
+function decryptVigenere(text, key) {
+    let keyIndex = 0;
+    return text.split('').map(char => {
+        if (/[a-zA-Z]/.test(char)) {
+            const base = char.charCodeAt(0) >= 97 ? 97 : 65; // Lowercase or uppercase
+            const shift = key[keyIndex % key.length].toLowerCase().charCodeAt(0) - 97;
+            keyIndex++;
+            return String.fromCharCode(((char.charCodeAt(0) - base - shift + 26) % 26) + base);
+        }
+        return char;
+    }).join('');
+}
+
+function encryptXOR(text, key) {
+    return text.split('').map((char, index) => {
+        return String.fromCharCode(char.charCodeAt(0) ^ key.charCodeAt(index % key.length));
+    }).join('');
+}
+
+function decryptXOR(text, key) {
+    return encryptXOR(text, key); // XOR رمزنگاری و دیکد کردن مشابه هم هستند
+}
+
+function getRandomOffset() {
+    return Math.floor(Math.random() * 25) + 1; // عدد تصادفی بین 1 تا 25
+}
+
+document.getElementById('encryptButton').addEventListener('click', () => {
+    const text = document.getElementById('inputText').value;
+    const algorithm = document.getElementById('algorithmSelect').value;
+    let result;
+
+    switch (algorithm) {
+        case 'caesar':
+            const caesarShift = parseInt(prompt("Enter shift value (1-25):"), 10);
+            result = encryptCaesar(text, caesarShift);
+            break;
+        case 'vigenere':
+            const vigenereKey = prompt("Enter Vigenère key:");
+            result = encryptVigenere(text, vigenereKey);
+            break;
+        case 'xor':
+            const xorKey = prompt("Enter XOR key:");
+            result = encryptXOR(text, xorKey);
+            break;
+        case 'random-offset':
+            const randomOffset = getRandomOffset(); // دریافت offset تصادفی
+            result = encryptCaesar(text, randomOffset);
+            alert(`Random offset used: ${randomOffset}`); // نمایش offset تصادفی
+            break;
+        case 'aes':
+            alert("AES is not implemented yet.");
+            return;
+        default:
+            result = "Unknown algorithm.";
     }
 
-    function decryptText(text) {
-        const parts = text.split(';');
-        let result = '';
-        for (let part of parts) {
-            if (part) {
-                const [offset, encryptedChar] = part.split(',');
-                const decryptedChar = String.fromCharCode(encryptedChar.charCodeAt(0) - parseInt(offset));
-                result += decryptedChar;
-            }
-        }
-        return result;
+    document.getElementById('resultTitle').classList.remove('hidden');
+    document.getElementById('result').textContent = result;
+    document.getElementById('result').classList.remove('hidden');
+});
+
+document.getElementById('decryptButton').addEventListener('click', () => {
+    const text = document.getElementById('result').textContent;
+    const algorithm = document.getElementById('algorithmSelect').value;
+    let result;
+
+    switch (algorithm) {
+        case 'caesar':
+            const caesarShift = parseInt(prompt("Enter shift value (1-25):"), 10);
+            result = decryptCaesar(text, caesarShift);
+            break;
+        case 'vigenere':
+            const vigenereKey = prompt("Enter Vigenère key:");
+            result = decryptVigenere(text, vigenereKey);
+            break;
+        case 'xor':
+            const xorKey = prompt("Enter XOR key:");
+            result = decryptXOR(text, xorKey);
+            break;
+        case 'aes':
+            alert("AES decryption is not implemented yet.");
+            return;
+        default:
+            result = "Unknown algorithm.";
     }
+
+    document.getElementById('resultTitle').classList.remove('hidden');
+    document.getElementById('result').textContent = result;
+    document.getElementById('result').classList.remove('hidden');
 });
