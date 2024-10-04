@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Text Encryption and Decryption</title>
+    <title>Encryption and Decryption Tool</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
         <h1>Encryption/Decryption</h1>
-        <div id="author">
-            <span id="authorText">by Pars13Ah</span>
-        </div>
-        <select id="action">
-            <option value="">Select an option</option>
-            <option value="encrypt">Encrypt</option>
-            <option value="decrypt">Decrypt</option>
+        <textarea id="inputText" placeholder="Enter text here..."></textarea>
+        <select id="algorithmSelect">
+            <option value="caesar">Caesar Cipher</option>
+            <option value="vigenere">Vigenère Cipher</option>
+            <option value="xor">XOR Cipher</option>
+            <option value="aes">AES Encryption</option>
+            <option value="random-offset">Random Offset</option>
         </select>
-        <textarea id="inputText" placeholder="Enter your text..."></textarea>
-        <button type="button">Result</button>
-        <h2 id="resultTitle"></h2>
-        <div id="result"></div>
-        <button id="copyButton">Copy</button>
+        <input type="text" id="customAlgorithm" placeholder="Enter custom algorithm here (optional)" class="hidden">
+        <button id="encryptButton">Encrypt</button>
+        <button id="decryptButton">Decrypt</button>
+        <p id="resultTitle" class="hidden">Result:</p>
+        <p id="result" class="hidden"></p>
+        <p id="authorText">Created By Parsa13Ah</p>
     </div>
-    <script src="script.js"></script>
+    
+    
+    <script src="algorithm.js"></script>
+
 </body>
 </html>
