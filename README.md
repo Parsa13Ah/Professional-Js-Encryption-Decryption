@@ -1,13 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <h1>Encryption and Decryption Tool</h1>
-    <p>This web application allows you to securely encrypt and decrypt text using a custom algorithm.</p>
-    <p>Enter your text and choose to either encrypt or decrypt it using the buttons provided.</p>
-    <p>by Parsa13Ah</p>
-</body>
-</html>
+# Encryption and Decryption Tool
+
+This tool is designed for encrypting and decrypting text using various algorithms. Users can enter their text and select one of the available algorithms for encryption or decryption.
+
+## Algorithms
+
+### 1. Caesar Cipher
+This is a type of symmetric encryption where each letter in the plaintext is shifted by a fixed amount. For example, with a shift of 3, the letter A becomes D.
+
+- **Encryption Method**: `encryptCaesar(text, shift)`
+- **Decryption Method**: `decryptCaesar(text, shift)`
+
+### 2. Vigenère Cipher
+This algorithm uses a keyword to shift letters. Each letter in the keyword corresponds to letters in the plaintext, and the shift is calculated based on the position of the letter in the keyword.
+
+- **Encryption Method**: `encryptVigenere(text, key)`
+- **Decryption Method**: `decryptVigenere(text, key)`
+
+### 3. XOR Cipher
+In this algorithm, each letter is XORed with a character from the key. This process is the same for both encryption and decryption.
+
+- **Encryption Method**: `encryptXOR(text, key)`
+- **Decryption Method**: `decryptXOR(text, key)`
+
+### 4. Random Offset
+This algorithm generates a random offset for encryption. It offers more security compared to the other methods by using a variable shift.
+
+- **Encryption Method**: `encryptRandomOffset(text)`
+- **Decryption Method**: `decryptRandomOffset(text)`
+
+## How to Use
+
+1. Enter your text in the input box.
+2. Select one of the available algorithms from the dropdown menu.
+3. Click the "Encrypt" button for encryption or the "Decrypt" button for decryption.
+4. The result will be displayed below the input box.
+
+## Requirements
+
+- Web browser (to use the tool)
+- No specific libraries or software are required.
+
+## Build and Development
+
+This tool is designed and developed by **Parsa13Ah**. For any inquiries or collaborations, please contact us.
+
+## License
+
+This project is licensed under the MIT License. For more details, please refer to the `LICENSE` file.
