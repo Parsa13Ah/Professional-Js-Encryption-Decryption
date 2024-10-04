@@ -8,6 +8,6 @@
     <h1>Encryption and Decryption Tool</h1>
     <p>This web application allows you to securely encrypt and decrypt text using a custom algorithm.</p>
     <p>Enter your text and choose to either encrypt or decrypt it using the buttons provided.</p>
-    <p>by ParsaAh</p>
+    <p>by Parsa13Ah</p>
 </body>
 </html>
