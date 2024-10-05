@@ -45,11 +45,20 @@ function encryptXOR(text, key) {
 }
 
 function decryptXOR(text, key) {
-    return encryptXOR(text, key); // XOR رمزنگاری و دیکد کردن مشابه هم هستند
+    return encryptXOR(text, key); // XOR encryption and decryption are the same
+}
+
+function encryptAES(text, key) {
+    return CryptoJS.AES.encrypt(text, key).toString();
+}
+
+function decryptAES(ciphertext, key) {
+    const bytes = CryptoJS.AES.decrypt(ciphertext, key);
+    return bytes.toString(CryptoJS.enc.Utf8);
 }
 
 function getRandomOffset() {
-    return Math.floor(Math.random() * 25) + 1; // عدد تصادفی بین 1 تا 25
+    return Math.floor(Math.random() * 25) + 1; // Random number between 1 and 25
 }
 
 document.getElementById('encryptButton').addEventListener('click', () => {
@@ -71,13 +80,14 @@ document.getElementById('encryptButton').addEventListener('click', () => {
             result = encryptXOR(text, xorKey);
             break;
         case 'random-offset':
-            const randomOffset = getRandomOffset(); // دریافت offset تصادفی
+            const randomOffset = getRandomOffset();
             result = encryptCaesar(text, randomOffset);
-            alert(`Random offset used: ${randomOffset}`); // نمایش offset تصادفی
+            alert(`Random offset used: ${randomOffset}`);
             break;
         case 'aes':
-            alert("AES is not implemented yet.");
-            return;
+            const aesKey = prompt("Enter AES key:");
+            result = encryptAES(text, aesKey);
+            break;
         default:
             result = "Unknown algorithm.";
     }
@@ -106,8 +116,9 @@ document.getElementById('decryptButton').addEventListener('click', () => {
             result = decryptXOR(text, xorKey);
             break;
         case 'aes':
-            alert("AES decryption is not implemented yet.");
-            return;
+            const aesKey = prompt("Enter AES key:");
+            result = decryptAES(text, aesKey);
+            break;
         default:
             result = "Unknown algorithm.";
     }
