@@ -1,3 +1,5 @@
+// Encrypt and Decrypt Functions
+
 function encryptCaesar(text, shift) {
     return text.split('').map(char => {
         if (/[a-zA-Z]/.test(char)) {
@@ -61,6 +63,8 @@ function getRandomOffset() {
     return Math.floor(Math.random() * 25) + 1; // Random number between 1 and 25
 }
 
+// Event Listeners
+
 document.getElementById('encryptButton').addEventListener('click', () => {
     const text = document.getElementById('inputText').value;
     const algorithm = document.getElementById('algorithmSelect').value;
@@ -79,14 +83,14 @@ document.getElementById('encryptButton').addEventListener('click', () => {
             const xorKey = prompt("Enter XOR key:");
             result = encryptXOR(text, xorKey);
             break;
+        case 'aes':
+            const aesKey = prompt("Enter AES key (16, 24, or 32 characters):");
+            result = encryptAES(text, aesKey);
+            break;
         case 'random-offset':
             const randomOffset = getRandomOffset();
             result = encryptCaesar(text, randomOffset);
             alert(`Random offset used: ${randomOffset}`);
-            break;
-        case 'aes':
-            const aesKey = prompt("Enter AES key:");
-            result = encryptAES(text, aesKey);
             break;
         default:
             result = "Unknown algorithm.";
